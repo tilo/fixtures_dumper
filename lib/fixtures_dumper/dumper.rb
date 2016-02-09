@@ -21,7 +21,7 @@ module FixturesDumper
         fixture_file = fixture_file_for(table_name)
         data = data_to_dump_for(table_name)
         dump_to(fixture_file, data)
-        puts "#{data.count} records dumped for #{table_name} table."
+        puts "#{data.count} records dumped for #{table_name} table to #{fixture_file}."
       end
     end
 
