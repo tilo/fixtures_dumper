@@ -10,6 +10,7 @@ module FixturesDumper
     def initialize(options = {})
       @tables_skipped_by_user = options[:skip_tables] ? options[:skip_tables].split(',') : []
       @table_to_dump = options[:table_to_dump]
+      @out_path = options[:out_path]
     end
 
     def dump
