@@ -5,7 +5,7 @@ module FixturesDumper
 
     TABLES_SKIPPED_BY_DEFAULT = %w(schema_migrations delayed_jobs)
 
-    attr_reader :table_to_dump, :tables_skipped_by_user
+    attr_reader :table_to_dump, :tables_skipped_by_user, :out_path
 
     def initialize(options = {})
       @tables_skipped_by_user = options[:skip_tables] ? options[:skip_tables].split(',') : []
@@ -88,7 +88,7 @@ module FixturesDumper
     end
 
     def fixtures_path
-      ARGV['FIXTURES_PATH'] || File.join Rails.root, 'test', 'fixtures'
+      out_path || File.join( Rails.root, 'test', 'fixtures' )
     end
 
     def connection
