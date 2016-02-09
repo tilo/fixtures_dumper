@@ -6,7 +6,8 @@ namespace :db do
     desc "Dump data from database to fixtures easily. Options: SKIP_TABLES: comma separated list of tables which will skipped during dumping. TABLE: table_name. Only this table will be dumped."
     task :dump => :environment do
       if ENV['TABLES']
-        ENV['TABLES'].each do |table|
+        ENV['TABLES'].split(',').each do |table|
+          puts "dumping table #{table}"
           FixturesDumper::Dumper.new(skip_tables: ENV['SKIP_TABLES'], table_to_dump: table ).dump
         end
       else

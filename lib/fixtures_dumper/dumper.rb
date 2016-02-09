@@ -74,6 +74,7 @@ module FixturesDumper
     end
 
     def dump_to(file, data)
+      FileUtils.mkdir_p( File.split(file).first )    # ensure path exists
       File.open(file, "w") do |f|
         data.each do |hash|
           f.write(sanitize_yaml(hash.to_yaml))
@@ -87,7 +88,7 @@ module FixturesDumper
     end
 
     def fixtures_path
-      File.join Rails.root, 'test', 'fixtures'
+      ARGV['FIXTURES_PATH'] || File.join Rails.root, 'test', 'fixtures'
     end
 
     def connection
