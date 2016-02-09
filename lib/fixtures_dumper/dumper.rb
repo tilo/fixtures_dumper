@@ -18,7 +18,7 @@ module FixturesDumper
       puts "Dumping fixtures for following tables:\n" << actual_tables_to_dump.join(', ')
 
       actual_tables_to_dump.each do |table_name|
-        fixture_file = fixture_file_for(table_name)
+        fixture_file = fixture_file_for(table_name, out_path)
         data = data_to_dump_for(table_name)
         dump_to(fixture_file, data)
         puts "#{data.count} records dumped for #{table_name} table."
@@ -61,8 +61,8 @@ module FixturesDumper
       end
     end
 
-    def fixture_file_for(table_name)
-      "#{fixtures_path}/#{table_name}.yml"
+    def fixture_file_for(table_name, out_path)
+      out_path ? "#{out_path}/#{table_name}.yml" : "#{fixtures_path}/#{table_name}.yml"
     end
 
     def data_to_dump_for(table_name)
@@ -88,7 +88,7 @@ module FixturesDumper
     end
 
     def fixtures_path
-      out_path || File.join( Rails.root, 'test', 'fixtures' )
+      File.join( Rails.root, 'test', 'fixtures' )
     end
 
     def connection
